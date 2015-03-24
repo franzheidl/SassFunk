@@ -12,6 +12,6 @@ else
 end
 
 module SassFunk
-  VERSION = "0.0.1"
+  VERSION = "0.0.2"
   DATE = "2015-03-24"
 end
