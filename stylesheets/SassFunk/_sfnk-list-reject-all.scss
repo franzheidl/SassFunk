@@ -1,0 +1,15 @@
+@function sfnk-list-reject-all($list, $value) {
+  @if type-of($list) == list {
+    $rejected: ();
+    @for $i from 1 through length($list) {
+      @if nth($list, $i) != $value {
+        $rejected: append($rejected, nth($list, $i));
+      }
+    }
+    @return $rejected;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-list-reject-all(). Pass a list or arglist.";
+    @return null;
+  }
+}

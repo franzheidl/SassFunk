@@ -1,0 +1,23 @@
+@include describe("The sfnk-colors-lighten function") {
+  
+  $color-list: (orange, #000, rgb(255, 121, 71));
+  $lightened-list: (#ffb733, #1a1a1a, #ff9e7a);
+  
+  @include it("should return the list of lightened colors") {
+    @include should(expect( sfnk-colors-lighten( $color-list, 10) ), to( be( $lightened-list ) ));
+  }
+  
+  @include it("should return the lightened color if the argument was a color") {
+    @include should(expect( sfnk-colors-lighten( #333, 50 ) ), to( equal( #b3b3b3 ) ));
+  }
+  
+  @include it("should return a single lightened color if only one color was passed") {
+    @include should(expect( sfnk-colors-lighten(orange, 10) ), to( be(#ffb733) ));
+  }
+  
+  @include it("should return null if the first argument is not a list of colors or a color") {
+    @include should(expect( sfnk-colors-lighten( 12, 50 ) ), to( be-null() ));
+    @include should(expect( sfnk-colors-lighten( "Test", 10 ) ), to( be-null() ));
+  }
+   
+}

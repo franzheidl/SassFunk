@@ -1,0 +1,57 @@
+@include describe("The sfnk-is-valid-border function") {
+  
+  @include it("should return true if in strict mode and less than three params were passed") {
+    @include should(expect( sfnk-is-valid-border(1px solid, true) ), to( be(false) ));
+  }
+  
+  @include it("should return true if in strict mode and more than three params were passed") {
+    @include should(expect( sfnk-is-valid-border(1px solid #bbb green, true) ), to( be(false) ));
+  }
+  
+  @include it("should return true if in strict mode and a full valid border declaration was passed") {
+    @include should(expect( sfnk-is-valid-border(1px solid #bbb, true) ), to( be(true) ));
+    @include should(expect( sfnk-is-valid-border(dashed 12px red, true) ), to( be(true) ));
+  }
+ 
+  @include it("should return true if border is a single numerical value of zero") {
+    @include should(expect( sfnk-is-valid-border(0) ), to( be(true) ));
+  }
+  
+  @include it("should return true if border is a single numerical value in px") {
+    @include should(expect( sfnk-is-valid-border(3px) ), to( be(true) ));
+  }
+  
+  @include it("should return true if border is a single color") {
+    @include should(expect( sfnk-is-valid-border(#333) ), to( be(true) ));
+    @include should(expect( sfnk-is-valid-border(yellow) ), to( be(true) ));
+  }
+   
+  @include it("should return true if border is a single valid border style") {
+    @include should(expect( sfnk-is-valid-border(solid) ), to(  be(true) ));
+    @include should(expect( sfnk-is-valid-border(dashed) ), to(  be(true) ));
+    @include should(expect( sfnk-is-valid-border(dotted) ), to(  be(true) ));
+    @include should(expect( sfnk-is-valid-border(double) ), to(  be(true) ));
+    @include should(expect( sfnk-is-valid-border(none) ), to(  be(true) ));
+  }
+  
+  @include it("should return false if border is a single string but not a valid border-type or none") {
+    @include should(expect( sfnk-is-valid-border(something) ), to(  be(false) ));
+  }
+  
+  @include it("should return false if border is a single unitless number other than zero") {
+    @include should(expect( sfnk-is-valid-border(13) ), to(  be(false) ));
+  }
+  
+  @include it("should return false if border is neither a string, color, number of zero of number in px") {
+    @include should(expect( sfnk-is-valid-border((1, 2, 3)) ), to(  be(false) ));
+    @include should(expect( sfnk-is-valid-border((test: 1, other: hiya)) ), to(  be(false) ));
+  }
+  
+  @include it("should return true if border is a string, color, number of zero of number in px, or any combinatin of these") {
+    @include should(expect( sfnk-is-valid-border(1px solid) ), to(  be(true) ));
+    @include should(expect( sfnk-is-valid-border(12px #ccc) ), to(  be(true) ));
+    @include should(expect( sfnk-is-valid-border(green dashed) ), to(  be(true) ));
+    @include should(expect( sfnk-is-valid-border(double 0) ), to(  be(true) ));
+  }
+  
+}

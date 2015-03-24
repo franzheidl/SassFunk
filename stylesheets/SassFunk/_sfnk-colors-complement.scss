@@ -1,0 +1,13 @@
+@function sfnk-colors-complement($colors) {
+  @if sfnk-is-color-list($colors) or type-of($colors) == color {
+    $complement: ();
+    @each $color in $colors {
+      $complement: append($complement, complement($color));
+    }
+    @return $complement;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($colors)} #{$colors} is not a valid argument for sfnk-colors-complement(). Pass multiple colors or a list of colors.";
+    @return null;
+  }
+}

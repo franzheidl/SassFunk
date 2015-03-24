@@ -1,0 +1,21 @@
+@function sfnk-list-reject-nth($list, $index, $pos: 1) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    $rejected-list: ();
+    @if $pos == -1 {
+      $list: sfnk-list-reverse($list);
+    }
+    @for $i from 1 through length($list) {
+      @if $i != $index {
+        $rejected-list: append($rejected-list, nth($list, $i));
+      }
+    }
+    @if $pos == -1 {
+      $rejected-list: sfnk-list-reverse($rejected-list);
+    }
+    @return $rejected-list;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-list-reject-nth(). Pass a list or arglist and the index of the item to be removed.";
+    @return null;
+  }
+}

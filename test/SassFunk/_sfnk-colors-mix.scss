@@ -1,0 +1,21 @@
+@include describe("The sf-colors-mix function") {
+  
+  $color-list1: (#333, #444, #555);
+  $mix1: #4c4c4c;
+  
+  $color-list2: (#000, #fff);
+  $mix2: #7f7f7f;
+  
+  @include it("should return a color that is the equal mix of all colors passed in") {
+    @include should(expect( sfnk-colors-mix( #333, #444, #555 ) ), to( be( $mix1 ) ));
+    @include should(expect( sfnk-colors-mix( #000, #fff ) ), to( be( $mix2 ) ));
+    @include should(expect( sfnk-colors-mix( #333, #444, #555, #888 )), to(be( #797979 ) ));
+  }
+  
+  @include it("should return null if the argument was not a color-list of at least two items") {
+    @include should(expect( sfnk-colors-mix( "not-a-list" ) ), to( be-null() ));
+    @include should(expect( sfnk-colors-mix( (#333) ) ), to( be-null() ));
+    @include should(expect( sfnk-colors-mix( #333 ) ), to( be-null() ));
+  }
+  
+}

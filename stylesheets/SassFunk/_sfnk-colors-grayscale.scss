@@ -1,0 +1,13 @@
+@function sfnk-colors-grayscale($colors) {
+  @if sfnk-is-color-list($colors) or type-of($colors) == color {
+    $grayscale: ();
+    @each $color in $colors {
+      $grayscale: append($grayscale, grayscale($color));
+    }
+    @return $grayscale;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($colors)} #{$colors} is not a valid argument for sfnk-colors-grayscale(). Pass multiple colors or a list of colors.";
+    @return null;
+  }
+}

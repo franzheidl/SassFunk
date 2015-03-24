@@ -1,0 +1,13 @@
+@function sfnk-colors-invert($colors) {
+  @if sfnk-is-color-list($colors) or type-of($colors) == color {
+    $invert: ();
+    @each $color in $colors {
+      $invert: append($invert, invert($color));
+    }
+    @return $invert;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($colors)} #{$colors} is not a valid argument for sfnk-colors-invert(). Pass multiple colors or a list of colors.";
+    @return null;
+  }
+}

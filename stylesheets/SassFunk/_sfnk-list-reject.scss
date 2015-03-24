@@ -1,0 +1,43 @@
+@function sfnk-list-reject($list, $value, $pos: 1) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    @if index($list, $value) {
+      $rejected-list: ();
+      @if $pos == -1 or $pos == 1 {
+        @if $pos == -1 { // index from end of list
+          $list: sfnk-list-reverse($list);
+        }
+        // (1, 2, 3, 4, 3, 5) --> (1, 2, 4, 3, 5)
+        $done: false;
+        @each $item in $list {
+          @if $item != $value {
+            $rejected-list: append($rejected-list, $item);
+          }
+          @else {
+            @if not $done {
+              $done: true;
+            }
+            @else {
+              $rejected-list: append($rejected-list, $item);
+            }
+          }
+        }
+        @if $pos == -1 { // reverse list again if it was reversed in order to remove the last matching element
+          $rejected-list: sfnk-list-reverse($rejected-list);
+        }
+        @return $rejected-list;
+      }
+      @else {
+        @warn "SassUtils: #{$pos} is not a valid position argument for reject-list(). Pass 1, -1, or nothing.";
+        @return null;
+      }
+      @return $list;
+    }
+    @else {
+      @return $list;
+    }
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-list-reject(). Pass a list or arglist and a value to be removed.";
+    @return null;
+  }
+}

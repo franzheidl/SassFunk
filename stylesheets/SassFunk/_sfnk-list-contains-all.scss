@@ -1,0 +1,14 @@
+@function sfnk-list-contains-all($list1, $list2) {
+  @if (type-of($list1) == list) and (type-of($list2) == list) {
+    @each $item in $list2 {
+      @if not index($list1, $item) {
+        @return false;
+      }
+    }
+    @return true;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list1)} #{$list1} #{type-of($list2)} #{$list2} are not valid arguments for sfnk-list-contains-all(). Pass two lists to compare.";
+    @return null;
+  }
+}

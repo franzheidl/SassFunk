@@ -1,0 +1,19 @@
+@include describe("The sfnk-colors-desaturate function") {
+
+  $color-list: (orange, #000, rgb(255, 121, 71));
+  $desaturated-color-list: (#e69e19, black, #ed8159);
+
+  @include it("should return the list of desaturated colors") {
+    @include should(expect( sfnk-colors-desaturate($color-list, 20) ), to( be($desaturated-color-list) ));
+  }
+
+  @include it("should return the desaturated color if only one color was passed") {
+    @include should(expect( sfnk-colors-desaturate(rgb(255, 121, 71), 20) ), to( be(#ed8159) ));
+  }
+
+  @include it("should return null if the first argument is not a list of colors or a color") {
+    @include should(expect( sfnk-colors-desaturate( 12, 50 ) ), to( be-null() ));
+    @include should(expect( sfnk-colors-desaturate( "Test", 10 ) ), to( be-null() ));
+  }
+
+}

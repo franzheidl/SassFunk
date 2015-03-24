@@ -1,0 +1,18 @@
+@function sfnk-colors-darken($colors, $value) {
+  @if type-of($colors) == list or type-of($colors) == color {
+    @if type-of($colors) == color {
+      @return darken($colors, $value);
+    }
+    @else {
+      $darkened: ();
+      @each $color in $colors {
+        $darkened: append($darkened, darken($color, $value));
+      }
+      @return $darkened;
+    }
+  }
+  @else {
+    @warn "SassFunk: #{type-of($colors)} #{$colors} is not a valid argument for sfnk-colors-darken(). Pass a list of colors.";
+    @return null;
+  }
+}

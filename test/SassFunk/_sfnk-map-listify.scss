@@ -1,0 +1,40 @@
+@include describe("The sfnk-map-listify function") {
+
+  $map: (key1: 7);
+  $list: (key1 7),;  // <- the comma forces Sass to create a list containing one list item
+  
+  $map1: (key1: 12, key2: #333);
+  $list1: ((key1 12, key2 #333));
+  
+  $map2: (key1: string, key2: (key2_1: 17, key2_2: #888));
+  $list2: (key1 string, key2 (key2_1: 17, key2_2: #888));
+  
+  $map3: (key1: 13, key2: 1px solid #aaa);
+  $list3: (key1 13, key2 (1px solid #aaa));
+  
+  $map4: (key1: 13, key2: 1 2 3 4);
+  $list4: (key1 13, key2 (1 2 3 4));
+  
+  
+  @include it("should return a list of lists where the first item is the key of the map") {
+    @include should(expect( sfnk-map-listify( $map1 ) ), to( be( $list1 ) ));
+    @include should(expect( sfnk-map-listify( $map4 ) ), to( be( $list4 ) ));
+  }
+  
+  @include it("should return a flat list if the map has only one key-value pair") {
+    @include should(expect( sfnk-map-listify( $map ) ), to( be( $list ) ));
+  }
+  
+  @include it("should leave values that are lists intact by default") {
+    @include should(expect( sfnk-map-listify( $map3 )), to( be( $list3 ) ));
+  }
+  
+  @include it("should leave values in the map that are maps themselves intact as maps") {
+    @include should(expect( sfnk-map-listify( $map2 )), to( be( $list2 ) ));
+  }
+  
+  @include it("should return null if the argument was not a map") {
+    @include should(expect( sfnk-map-listify("test") ), to( be-null() ));
+    @include should(expect( sfnk-map-listify(17) ), to( be-null() ));
+  }
+}

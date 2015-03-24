@@ -1,0 +1,14 @@
+@function sfnk-list-contains($list, $value) {
+  @if type-of($list) == list {
+    @if index($list, $value) {
+      @return true;
+    }
+    @else {
+      @return false;
+    }
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-list-contains(). Pass a list or arglist.";
+    @return null;
+  }
+}

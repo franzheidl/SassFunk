@@ -1,0 +1,17 @@
+@function sfnk-colors-mix($colors...) {
+  @if sfnk-is-color-list($colors) and length($colors) > 1 {
+    $mix: nth($colors, 1);
+    $colors: sfnk-list-reject-nth($colors, 1);
+    $i: 1;
+    @each $item in $colors {
+      $i: $i + 1;
+      $perc: 100% / $i;
+      $mix: mix($mix, $item, $perc);
+    }
+    @return $mix;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($colors)} #{$colors} is not a valid argument for sfnk-colors-mix(). Pass multiple colors or a list of colors.";
+    @return null;
+  }
+}

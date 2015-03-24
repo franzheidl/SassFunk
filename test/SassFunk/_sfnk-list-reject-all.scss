@@ -1,0 +1,15 @@
+@include describe("The sfnk-list-reject-all function") {
+  
+  $list: (1, 2, 3, 4, 5, 3);
+  $rejected-list: (1, 2, 4, 5);
+  $not-a-list: 12;
+
+  @include it("should remove all items of a given value from a list") {
+    @include should(expect( sfnk-list-reject-all( $list, 3 ) ), to( be( $rejected-list ) ));
+  }
+
+  @include it("should return null if the first argument was not a list") {
+    @include should(expect( sfnk-list-reject-all( $not-a-list, 1 ) ), to( be-null() ));
+  }
+
+}

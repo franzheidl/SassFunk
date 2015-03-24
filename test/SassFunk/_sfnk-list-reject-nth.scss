@@ -1,0 +1,23 @@
+@include describe("The sfnk-list-reject-nth function") {
+  
+  $list: (one, two, three, four, five);
+  $not-a-list: "not-a-list";
+  $result-removed: (one, three);
+  
+  @include it("should remove the nth item from a list") {
+    @include should(expect( sfnk-list-reject-nth( $list, 2) ), to( be( (one, three, four, five) ) ));
+  }
+  
+  @include it("should reject the nth item from the end of the list if position argument minus one was passed") {
+    @include should(expect(sfnk-list-reject-nth($list, 2, -1) ), to( be( (one, two, three, five) )));
+  }
+  
+  @include it("should return the list unchanged if given index was out of range") {
+    @include should(expect( sfnk-list-reject-nth( $list, 6) ), to( be( $list ) ));
+  }
+  
+  @include it("should return null if the argument was not a list") {
+    @include should(expect( sfnk-list-reject-nth( $not-a-list, 3 ) ), to( be-null() ));
+  }
+  
+}

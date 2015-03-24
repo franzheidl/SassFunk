@@ -1,0 +1,23 @@
+@include describe("The sfnk-is-color-list function") {
+  
+  $color-list1: #333 #555 #f2f2f2;
+  $color-list2: (#222, orange, rgba(0, 0, 0, .5));
+  
+  $not-a-color-list: "Alpha" "Omega";
+  
+  $not-a-list: 1234;
+  
+  @include it("should return true if a list contains colors exclusively") {
+    @include should(expect( sfnk-is-color-list( $color-list1 ) ), to( be-truthy() ));
+    @include should(expect( sfnk-is-color-list( $color-list2 ) ), to( be-truthy() ));
+  }
+  
+  @include it("should return false if a list contains items other than colors") {
+    @include should(expect( sfnk-is-color-list( $not-a-color-list ) ), to( be-falsy() ));
+  }
+  
+  @include it("should return null if the argument is not a list at all") {
+    @include should(expect( sfnk-is-color-list( $not-a-list ) ), to( be-null() ));
+  }
+  
+}

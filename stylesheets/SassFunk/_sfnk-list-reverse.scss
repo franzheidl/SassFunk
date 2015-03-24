@@ -1,0 +1,16 @@
+@function sfnk-list-reverse($list) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    $reversed: ();
+    @for $i from 0 through length($list) {
+      $rev-index: length($list) - $i;
+      @if $rev-index > 0 {
+        $reversed: append($reversed, nth($list, $rev-index));
+      }
+    }
+    @return $reversed;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-list-reverse(). Pass a list or arglist.";
+    @return null;
+  }
+}

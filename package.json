@@ -1,0 +1,26 @@
+{
+  "name": "SassFunk",
+  "title": "SassFunk",
+  "description": "A collection of Sass utility functions",
+  "version": "0.0.1",
+  "author": "Franz Heidl",
+  "license": "MIT",
+  "homepage": "https://github.com/franzheidl/SassFunk",
+  "repository": "https://github.com/franzheidl/SassFunk.git",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "matchdep": "~0.3.0",
+    "bootcamp": "~1.1.7",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-contrib-sass": "~0.8.1",
+    "grunt-inline": "~0.3.4",
+    "grunt-contrib-concat": "~0.5.0",
+    "grunt-contrib-jade": "~0.13.0",
+    "grunt-contrib-copy": "~0.7.0",
+    "grunt-browser-sync": "1.5.3",
+    "grunt-gh-pages": "~0.9.1"
+  }
+}

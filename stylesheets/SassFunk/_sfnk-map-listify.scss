@@ -1,0 +1,24 @@
+@function sfnk-map-listify($map, $flatten-lists: false) {
+  @if type-of($map) == map {
+    $flattened: ();
+    $keys: map-keys($map);
+    @for $i from 1 through length($map) {
+      $list: ();
+      $key: nth($keys, $i);
+      $value: map-get($map, $key);
+      @if type-of($value) == list and $flatten-lists == true {
+        $list: sfnk-list-prepend($value, $key);
+      }
+      @else {
+        $list: append($list, $key);
+        $list: append($list, $value);
+      }
+      $flattened: append($flattened, $list);
+    }
+    @return $flattened;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($map)} #{$map} is not a valid argument for sfnk-map-listify(). Pass a list or arglist.";
+    @return null;
+  }
+}

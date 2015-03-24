@@ -1,0 +1,9 @@
+@function sfnk-map-set($map, $key, $value) {
+  @if type-of($map) == map {
+    @return map-merge($map, ($key: $value));
+  }
+  @else {
+    @warn "SassFunk: #{type-of($map)} #{$map} is not a valid argument for sfnk-map-set(). Pass a map as the first argument.";
+    @return null;
+  }
+}

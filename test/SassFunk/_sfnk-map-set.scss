@@ -1,0 +1,13 @@
+@include describe("The sfnk-map-set function") {
+  $old_map: (key: 12);
+  $new_map: (key: 999);
+  
+  @include it("should set the provided key of the map to the provided value") {
+    @include should( expect( sfnk-map-set($old_map, key, 999)), to( be($new_map) ));
+  }
+  
+  @include it("should return null if the first argument was not a map") {
+    @include should(expect( sfnk-map-set(test, key, val) ), to( be-null() ));
+  }
+  
+}

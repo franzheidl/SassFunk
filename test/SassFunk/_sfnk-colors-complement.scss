@@ -1,0 +1,19 @@
+@include describe("The sfnk-colors-complement function") {
+
+  $color-list: (orange, #000, rgb(255, 121, 71));
+  $complement-list: (#005aff, black, #47cdff);
+
+  @include it("should return the list of complement colors") {
+    @include should(expect( sfnk-colors-complement($color-list) ), to( be($complement-list) ));
+  }
+
+  @include it("should return the complement color if only one color was passed") {
+    @include should(expect( sfnk-colors-complement(rgb(255, 121, 71)) ), to( be(#47cdff) ));
+  }
+
+  @include it("should return null if the first argument is not a list of colors or a color") {
+    @include should(expect( sfnk-colors-complement( 12 ) ), to( be-null() ));
+    @include should(expect( sfnk-colors-complement( "Test" ) ), to( be-null() ));
+  }
+
+}

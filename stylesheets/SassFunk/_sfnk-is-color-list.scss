@@ -1,0 +1,14 @@
+@function sfnk-is-color-list($list) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    @each $item in $list {
+      @if type-of($item) != color {
+        @return false;
+      }
+    }
+    @return true;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-is-color-list(). Pass a list or arglist.";
+    @return null;
+  }
+}

@@ -1,0 +1,18 @@
+@include describe("The sfnk-is-nested-list function") {
+  
+  $list: 1 2 3 4 5;
+  $nested-list: (1, 2, (3, 4), 5);
+  
+   @include it("should return false if a list does not contain lists as items") {
+     @include should(expect( sfnk-is-nested-list( $list ) ), to( be(false) ));
+   }
+   
+   @include it("should return true if a list contains lists as items") {
+     @include should(expect( sfnk-is-nested-list( $nested-list ) ), to( be(true) ));
+   }
+   
+   @include it("should return null if the argument was not a list") {
+     @include should(expect( sfnk-is-nested-list("not-a-list") ), to( be-null() ));
+   }
+  
+}

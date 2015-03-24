@@ -1,0 +1,14 @@
+@function sfnk-is-grayscale-color($color) {
+  @if type-of($color) == color {
+    @if red($color) == green($color) and green($color) == blue($color) {
+      @return true;
+    }
+    @else {
+      @return false;
+    }
+  }
+  @else {
+    @warn "SassFunk: #{type-of($color)} #{$color} is not a valid argument for sfnk-is-grayscale-color(). Pass a color instead.";
+    @return null;
+  }
+}

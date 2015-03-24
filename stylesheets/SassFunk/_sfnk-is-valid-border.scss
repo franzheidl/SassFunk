@@ -1,0 +1,58 @@
+@function sfnk-is-valid-border($border, $strict: false) {
+  $borderTypes: color string number;
+  $borderStyles: solid dotted dashed double none;
+  $validBorder: false;
+  $has: (width: false, style: false, color: false);
+  
+  @if $strict == true {
+    @if type-of($border) == list or type-of($border) == arglist {
+      @if length($border) == 3 {
+        @each $item in $border {
+          @if type-of($item) == color {
+            $has: sfnk-map-set($has, color, true);
+          }
+          @else if type-of($item) == number {
+            @if $item == 0 or unit($item) == px {
+              $has: sfnk-map-set($has, width, true);
+            }
+          }
+          @else if type-of($item) == string {
+            @if sfnk-list-contains($borderStyles, $item) {
+              $has: sfnk-map-set($has, style, true);
+            }
+          }
+        }
+        @if map-get($has, width) == true and map-get($has, style) == true and map-get($has, color) == true {
+          @return true;
+        }
+        @else {
+          @return false;
+        }
+      }
+      @else {
+        @return false;
+      }
+    }
+    @else {
+      @return false;
+    }
+  }
+  @else {
+    @each $item in $border {
+      @if type-of($item) == string {
+        @if (sfnk-list-contains($borderStyles, $item)) == false  {
+          @return false;
+        }
+      }
+      @else if type-of($item) == number {
+        @if ($item != 0 and unitless($item)) {
+          @return false;
+        }
+      }
+      @else if type-of($item) != color {
+        @return false;
+      }
+    }
+    @return true;
+  }
+}

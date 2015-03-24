@@ -1,0 +1,37 @@
+@include describe("The sfnk-map-listify-deep function") {
+  
+  $map: (key1: 12, key2: 13, key3: 12 24 36);
+  $list: (key1 12, key2 13, key3 (12 24 36));
+  
+  $map1: (keyA: 256, keyB: test);
+  $list1: (keyA 256, keyB test);
+  
+  $map2: (key: value);
+  $list2: (key value),;
+  
+  $not-a-list: test;
+  
+  $map3: (key1: test, key2: (key2_1: green, key2_2: 12px 13px 0));
+  $list3: (key1 test, key2 (key2_1 green, key2_2 (12px 13px 0)));
+  
+  @include it("should return a list of lists where the first item is the key of the map") {
+    @include should( expect(sfnk-map-listify-deep($map) ), to( be($list) ) );
+  }
+
+  @include it("should flatten the map recursively") {
+    @include should( expect( sfnk-map-listify-deep($map3) ), to( be( $list3 ) ));
+  }
+
+  @include it("should behave like the non-recursive version if the map is not nested") {
+    @include should( expect( sfnk-map-listify-deep($map1) ), to( be( sfnk-map-listify( $map1 )) ) );
+  }
+  
+  @include it("should return a flat list if the map has only one key-value pair") {
+    @include should(expect( sfnk-map-listify-deep( $map2 ) ), to( be( $list2 ) ));
+  }
+  
+  @include it("should return null if the argument was not a list") {
+    @include should(expect( sfnk-map-listify-deep( $not-a-list ) ), to( be-null() ));
+  }
+  
+}

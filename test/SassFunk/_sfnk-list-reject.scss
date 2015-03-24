@@ -1,0 +1,31 @@
+@include describe("The sf-list-reject function") {
+ 
+ $list1: (1, 2, 3, 4, 5);
+ $list2: (1, 2, 3, 4, 3, 5, 3);
+ $not-a-list: "not-a-list";
+ 
+ @include it("should remove a value from a list if the value is in the list") {
+    @include should(expect( sfnk-list-reject( $list1, 3 ) ), to( be( (1, 2, 4, 5) ) ));
+ }
+ 
+ @include it("should remove a value at the first position in the list if it was found more than once in the list") {
+    @include should(expect( sfnk-list-reject( $list2, 3 ) ), to( be( (1, 2, 4, 3, 5, 3) ) ));
+ }
+ 
+ @include it("should remove a value at the last position in the list if it was found more than once in the list and pos was passed as minus one") {
+    @include should(expect( sfnk-list-reject( $list2, 3, -1 ) ), to( be( (1, 2, 3, 4, 3, 5) ) ));
+ }
+ 
+ @include it("should retun null if position argument was zero") {
+   @include should(expect( sfnk-list-reject( $list1, 3, 0 ) ), to( be-null() ));
+ }
+ 
+ @include it("should return the list as is if the given value was not found in the list") {
+   @include should(expect( sfnk-list-reject( $list1, 8 ) ), to( be( $list1 ) ));
+ }
+ 
+ @include it("should return null if the argument was not a list") {
+   @include should(expect( sfnk-list-reject( $not-a-list, 3 ) ), to( be-null() ));
+ }
+  
+}

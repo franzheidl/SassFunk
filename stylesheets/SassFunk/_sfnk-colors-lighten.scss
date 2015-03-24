@@ -1,0 +1,18 @@
+@function sfnk-colors-lighten($colors, $value) {
+  @if type-of($colors) == list or type-of($colors) == color {
+    @if type-of($colors) == color {
+      @return lighten($colors, $value);
+    }
+    @else {
+      $lightened: ();
+      @each $color in $colors {
+        $lightened: append($lightened, lighten($color, $value));
+      }
+      @return $lightened;
+    }
+  }
+  @else {
+    @warn "SassFunk: #{type-of($colors)} #{$colors} is not a valid argument for sfnk-colors-lighten(). Pass a list of colors.";
+    @return null;
+  }
+}

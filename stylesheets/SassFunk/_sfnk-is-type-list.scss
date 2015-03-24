@@ -1,0 +1,14 @@
+@function sfnk-is-type-list($list, $type) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    @each $item in $list {
+      @if type-of($item) != $type {
+        @return false;
+      }
+    }
+    @return true;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list}, #{$type} is not a valid argument for sfnk-list-items-type(). Pass a list or arglist.";
+    @return null;
+  }
+}

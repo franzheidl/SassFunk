@@ -1,0 +1,16 @@
+@include describe("The sfnk-list-reverse function") {
+  
+  $list-asc: (1, 2, 3, 4, 5);
+  $list-desc: (5, 4, 3, 2, 1);
+  $not-a-list: "not-a-list";
+  
+  @include it("should reverse the values in a list") {
+    @include should(expect( sfnk-list-reverse( $list-asc ) ), to( be( $list-desc ) ));
+    @include should(expect( sfnk-list-reverse( ("Peter", "Paul", "John") ) ), to( be( ("John", "Paul", "Peter") ) ));
+  }
+  
+  @include it("should return null if the argument was not a list") {
+    @include should(expect( sfnk-list-reverse( $not-a-list ) ), to( be-null() ));
+  }
+  
+}

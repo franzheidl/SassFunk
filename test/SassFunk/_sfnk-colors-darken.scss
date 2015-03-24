@@ -1,0 +1,19 @@
+@include describe("The sfnk-colors-darken function") {
+  
+  $color-list: (orange, #fff, rgb(255, 121, 71));
+  $darkened-list: (#cc8400, #e6e6e6, #ff5414);
+  
+  @include it("should return the list of darkened colors") {
+    @include should(expect( sfnk-colors-darken( $color-list, 10) ), to( be( $darkened-list ) ));
+  }
+  
+  @include it("should return one darkened color if the argument was a single color") {
+    @include should(expect( sfnk-colors-darken( #f2f2f2, 10 ) ), to( equal( #d8d8d8 ) ));
+  }
+  
+  @include it("should return null if the first argument is not a list of colors or a color") {
+    @include should(expect( sfnk-colors-darken( 12, 50 ) ), to( be-null() ));
+    @include should(expect( sfnk-colors-darken( "Test", 10 ) ), to( be-null() ));
+  }
+   
+}

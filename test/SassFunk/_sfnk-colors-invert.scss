@@ -1,0 +1,19 @@
+@include describe("The sfnk-colors-invert function") {
+
+  $color-list: (orange, #000, rgb(255, 121, 71));
+  $invert-list: (#005aff, white, #0086b8);
+
+  @include it("should return the list of inverted colors") {
+    @include should(expect( sfnk-colors-invert($color-list) ), to( be($invert-list) ));
+  }
+
+  @include it("should return the inverted color if only one color was passed") {
+    @include should(expect( sfnk-colors-invert(rgb(255, 121, 71)) ), to( be(#0086b8) ));
+  }
+
+  @include it("should return null if the first argument is not a list of colors or a color") {
+    @include should(expect( sfnk-colors-invert( 12 ) ), to( be-null() ));
+    @include should(expect( sfnk-colors-invert( "Test" ) ), to( be-null() ));
+  }
+
+}

@@ -1,0 +1,19 @@
+@include describe("The sfnk-is-type-list function") {
+  
+  @include it("should return true if all of the items in the list are of the specified type") {
+    @include should(expect( sfnk-is-type-list((1, 2, 3), number) ), to( be(true) ));
+    @include should(expect( sfnk-is-type-list((one , two, three), string) ), to( be(true) ));
+    @include should(expect( sfnk-is-type-list((#333 , orange, rgba(0,0,0, .5)), color) ), to( be(true) ));
+  }
+  
+  
+  @include it("should return false if any item in a list is not of the specified type") {
+    @include should(expect( sfnk-is-type-list( (1, "two", 3), number ) ), to( be( false ) ));
+  }
+  
+  @include it("should return null if the first argument was not a list") {
+    @include should(expect( sfnk-is-type-list(1px, string) ), to( be-null() ));
+    @include should(expect( sfnk-is-type-list("one", number) ), to( be-null() ));
+  }
+  
+}

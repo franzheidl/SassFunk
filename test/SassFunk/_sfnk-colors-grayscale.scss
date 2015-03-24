@@ -1,0 +1,19 @@
+@include describe("The sfnk-colors-grayscale function") {
+
+  $color-list: (orange, #000, rgb(255, 121, 71));
+  $grayscale-list: (gray, black, #a3a3a3);
+
+  @include it("should return the list of grayscale colors") {
+    @include should(expect( sfnk-colors-grayscale($color-list) ), to( be($grayscale-list) ));
+  }
+
+  @include it("should return the grayscale color if only one color was passed") {
+    @include should(expect( sfnk-colors-grayscale(rgb(255, 121, 71)) ), to( be(#a3a3a3) ));
+  }
+
+  @include it("should return null if the first argument is not a list of colors or a color") {
+    @include should(expect( sfnk-colors-grayscale( 12 ) ), to( be-null() ));
+    @include should(expect( sfnk-colors-grayscale( "Test" ) ), to( be-null() ));
+  }
+
+}

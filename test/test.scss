@@ -1,0 +1,32 @@
+@import "bootcamp";
+@import "../stylesheets/SassFunk";
+
+@include runner-start;
+
+@import "SassFunk/sfnk-colors-complement";
+@import "SassFunk/sfnk-colors-darken";
+@import "SassFunk/sfnk-colors-desaturate";
+@import "SassFunk/sfnk-colors-grayscale";
+@import "SassFunk/sfnk-colors-invert";
+@import "SassFunk/sfnk-colors-lighten";
+@import "SassFunk/sfnk-colors-mix";
+@import "SassFunk/sfnk-colors-saturate";
+@import "SassFunk/sfnk-is-color-list";
+@import "SassFunk/sfnk-is-grayscale-color";
+@import "SassFunk/sfnk-is-nested-list";
+@import "SassFunk/sfnk-is-numeric-list";
+@import "SassFunk/sfnk-is-type-list";
+@import "SassFunk/sfnk-is-valid-border";
+@import "SassFunk/sfnk-list-contains-all";
+@import "SassFunk/sfnk-list-contains";
+@import "SassFunk/sfnk-list-mapify";
+@import "SassFunk/sfnk-list-prepend";
+@import "SassFunk/sfnk-list-reject-all";
+@import "SassFunk/sfnk-list-reject-nth";
+@import "SassFunk/sfnk-list-reject";
+@import "SassFunk/sfnk-list-reverse";
+@import "SassFunk/sfnk-map-listify-deep";
+@import "SassFunk/sfnk-map-listify";
+@import "SassFunk/sfnk-map-set";
+
+@include runner-end;

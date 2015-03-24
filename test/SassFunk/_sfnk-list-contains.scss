@@ -1,0 +1,15 @@
+@include describe("The sfnk-list-contains function") {
+  
+  @include it("should return true if the value is in the list") {
+    @include should(expect( sfnk-list-contains(("one", "two"), "two") ), to(be( true ) ));
+  }
+  
+  @include it("should return false if the value is not in the list") {
+    @include should(expect( sfnk-list-contains(("one", "two"), "three") ), to(be( false ) ));
+  }
+  
+  @include it("should return null if the first argument was not a list") {
+    @include should(expect( sfnk-list-contains("one", "two") ), to(be-null() ));
+  }
+  
+}

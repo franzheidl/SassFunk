@@ -1,0 +1,19 @@
+@include describe("The sfnk-colors-saturate function") {
+  
+  $color-list: (orange, #000, rgb(255, 121, 71));
+  $saturated-color-list: (orange, black, #ff7947);
+  
+  @include it("should return the list of saturated colors") {
+    @include should(expect( sfnk-colors-saturate($color-list, 10) ), to( be($saturated-color-list) ));
+  }
+  
+  @include it("should return the saturated color if only one color was passed") {
+    @include should(expect( sfnk-colors-saturate((rgb(255, 121, 71)), 10) ), to( be(#ff7947) ));
+  }
+  
+  @include it("should return null if the first argument is not a list of colors or a color") {
+    @include should(expect( sfnk-colors-saturate( 12, 50 ) ), to( be-null() ));
+    @include should(expect( sfnk-colors-saturate( "Test", 10 ) ), to( be-null() ));
+  }
+  
+}

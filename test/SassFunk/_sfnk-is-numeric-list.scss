@@ -1,0 +1,16 @@
+@include describe("the sfnk-is-numeric-list function") {
+  
+  @include it("should return true if all items in a list are colors") {
+    @include should(expect( sfnk-is-numeric-list( (1, 2, 3, 4) ) ), to( be(true) ));
+  }
+  
+  
+  @include it("should return false if a list contains items other than numbers") {
+    @include should(expect( sfnk-is-numeric-list( (1, "two", 3) ) ), to( be( false ) ));
+  }
+  
+  @include it("should return null if the argument was not a list") {
+    @include should(expect( sfnk-is-numeric-list( "alpha" ) ), to( be-null() ));
+  }
+  
+}

@@ -1,0 +1,14 @@
+@function sfnk-is-nested-list($list) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    @each $item in $list {
+      @if type-of($item) == list {
+        @return true;
+      }
+    }
+    @return false;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-is-nested-list(). Pass a list or arglist.";
+    @return null;
+  }
+}

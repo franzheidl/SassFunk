@@ -1,0 +1,13 @@
+@function sfnk-colors-desaturate($colors, $value) {
+  @if sfnk-is-color-list($colors) or type-of($colors) == color {
+    $desaturated: ();
+    @each $color in $colors {
+      $desaturated: append($desaturated, desaturate($color, $value));
+    }
+    @return $desaturated;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($colors)} #{$colors} is not a valid argument for sfnk-colors-desaturate(). Pass multiple colors or a list of colors.";
+    @return null;
+  }
+}

@@ -1,0 +1,14 @@
+@function sfnk-list-prepend($list, $value) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    $new-list: ();
+    $new-list: append($new-list, $value);
+    @each $item in $list {
+      $new-list: append($new-list, $item);
+    }
+    @return $new-list;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-list-prepend(). Pass a list or arglist.";
+    @return null;
+  }
+}
