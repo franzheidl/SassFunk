@@ -1,0 +1,521 @@
+/*
+------------------------------------------------------
+SassFunk 
+v0.0.1 
+Homepage: https://github.com/franzheidl/SassFunk 
+Repository: https://github.com/franzheidl/SassFunk.git 
+Franz Heidl, 2015
+------------------------------------------------------
+*/ 
+
+@function sfnk-colors-complement($colors) {
+  @if sfnk-is-color-list($colors) or type-of($colors) == color {
+    $complement: ();
+    @each $color in $colors {
+      $complement: append($complement, complement($color));
+    }
+    @return $complement;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($colors)} #{$colors} is not a valid argument for sfnk-colors-complement(). Pass multiple colors or a list of colors.";
+    @return null;
+  }
+}
+
+@function sfnk-colors-darken($colors, $value) {
+  @if type-of($colors) == list or type-of($colors) == color {
+    @if type-of($colors) == color {
+      @return darken($colors, $value);
+    }
+    @else {
+      $darkened: ();
+      @each $color in $colors {
+        $darkened: append($darkened, darken($color, $value));
+      }
+      @return $darkened;
+    }
+  }
+  @else {
+    @warn "SassFunk: #{type-of($colors)} #{$colors} is not a valid argument for sfnk-colors-darken(). Pass a list of colors.";
+    @return null;
+  }
+}
+
+@function sfnk-colors-desaturate($colors, $value) {
+  @if sfnk-is-color-list($colors) or type-of($colors) == color {
+    $desaturated: ();
+    @each $color in $colors {
+      $desaturated: append($desaturated, desaturate($color, $value));
+    }
+    @return $desaturated;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($colors)} #{$colors} is not a valid argument for sfnk-colors-desaturate(). Pass multiple colors or a list of colors.";
+    @return null;
+  }
+}
+
+@function sfnk-colors-grayscale($colors) {
+  @if sfnk-is-color-list($colors) or type-of($colors) == color {
+    $grayscale: ();
+    @each $color in $colors {
+      $grayscale: append($grayscale, grayscale($color));
+    }
+    @return $grayscale;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($colors)} #{$colors} is not a valid argument for sfnk-colors-grayscale(). Pass multiple colors or a list of colors.";
+    @return null;
+  }
+}
+
+@function sfnk-colors-invert($colors) {
+  @if sfnk-is-color-list($colors) or type-of($colors) == color {
+    $invert: ();
+    @each $color in $colors {
+      $invert: append($invert, invert($color));
+    }
+    @return $invert;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($colors)} #{$colors} is not a valid argument for sfnk-colors-invert(). Pass multiple colors or a list of colors.";
+    @return null;
+  }
+}
+
+@function sfnk-colors-lighten($colors, $value) {
+  @if type-of($colors) == list or type-of($colors) == color {
+    @if type-of($colors) == color {
+      @return lighten($colors, $value);
+    }
+    @else {
+      $lightened: ();
+      @each $color in $colors {
+        $lightened: append($lightened, lighten($color, $value));
+      }
+      @return $lightened;
+    }
+  }
+  @else {
+    @warn "SassFunk: #{type-of($colors)} #{$colors} is not a valid argument for sfnk-colors-lighten(). Pass a list of colors.";
+    @return null;
+  }
+}
+
+@function sfnk-colors-mix($colors...) {
+  @if sfnk-is-color-list($colors) and length($colors) > 1 {
+    $mix: nth($colors, 1);
+    $colors: sfnk-list-reject-nth($colors, 1);
+    $i: 1;
+    @each $item in $colors {
+      $i: $i + 1;
+      $perc: 100% / $i;
+      $mix: mix($mix, $item, $perc);
+    }
+    @return $mix;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($colors)} #{$colors} is not a valid argument for sfnk-colors-mix(). Pass multiple colors or a list of colors.";
+    @return null;
+  }
+}
+
+@function sfnk-colors-saturate($colors, $value) {
+  @if sfnk-is-color-list($colors) or type-of($colors) == color {
+    $saturated: ();
+    @each $color in $colors {
+      $saturated: append($saturated, saturate($color, $value));
+    }
+    @return $saturated;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($colors)} #{$colors} is not a valid argument for sfnk-colors-saturate(). Pass multiple colors or a list of colors.";
+    @return null;
+  }
+}
+
+@function sfnk-is-color-list($list) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    @each $item in $list {
+      @if type-of($item) != color {
+        @return false;
+      }
+    }
+    @return true;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-is-color-list(). Pass a list or arglist.";
+    @return null;
+  }
+}
+
+@function sfnk-is-grayscale-color($color) {
+  @if type-of($color) == color {
+    @if red($color) == green($color) and green($color) == blue($color) {
+      @return true;
+    }
+    @else {
+      @return false;
+    }
+  }
+  @else {
+    @warn "SassFunk: #{type-of($color)} #{$color} is not a valid argument for sfnk-is-grayscale-color(). Pass a color instead.";
+    @return null;
+  }
+}
+
+@function sfnk-is-nested-list($list) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    @each $item in $list {
+      @if type-of($item) == list {
+        @return true;
+      }
+    }
+    @return false;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-is-nested-list(). Pass a list or arglist.";
+    @return null;
+  }
+}
+
+@function sfnk-is-numeric-list($list) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    @each $item in $list {
+      @if type-of($item) != number {
+        @return false;
+      }
+    }
+    @return true;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-is-numeric-list(). Pass a list or arglist.";
+    @return null;
+  }
+}
+
+@function sfnk-is-valid-border($border, $strict: false) {
+  $borderTypes: color string number;
+  $borderStyles: solid dotted dashed double none;
+  $validBorder: false;
+  $has: (width: false, style: false, color: false);
+  
+  @if $strict == true {
+    @if type-of($border) == list or type-of($border) == arglist {
+      @if length($border) == 3 {
+        @each $item in $border {
+          @if type-of($item) == color {
+            $has: sfnk-map-set($has, color, true);
+          }
+          @else if type-of($item) == number {
+            @if $item == 0 or unit($item) == px {
+              $has: sfnk-map-set($has, width, true);
+            }
+          }
+          @else if type-of($item) == string {
+            @if sfnk-list-contains($borderStyles, $item) {
+              $has: sfnk-map-set($has, style, true);
+            }
+          }
+        }
+        @if map-get($has, width) == true and map-get($has, style) == true and map-get($has, color) == true {
+          @return true;
+        }
+        @else {
+          @return false;
+        }
+      }
+      @else {
+        @return false;
+      }
+    }
+    @else {
+      @return false;
+    }
+  }
+  @else {
+    @each $item in $border {
+      @if type-of($item) == string {
+        @if (sfnk-list-contains($borderStyles, $item)) == false  {
+          @return false;
+        }
+      }
+      @else if type-of($item) == number {
+        @if ($item != 0 and unitless($item)) {
+          @return false;
+        }
+      }
+      @else if type-of($item) != color {
+        @return false;
+      }
+    }
+    @return true;
+  }
+}
+
+@function sfnk-list-contains-all($list1, $list2) {
+  @if (type-of($list1) == list) and (type-of($list2) == list) {
+    @each $item in $list2 {
+      @if not index($list1, $item) {
+        @return false;
+      }
+    }
+    @return true;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list1)} #{$list1} #{type-of($list2)} #{$list2} are not valid arguments for sfnk-list-contains-all(). Pass two lists to compare.";
+    @return null;
+  }
+}
+
+@function sfnk-list-contains($list, $value) {
+  @if type-of($list) == list {
+    @if index($list, $value) {
+      @return true;
+    }
+    @else {
+      @return false;
+    }
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-list-contains(). Pass a list or arglist.";
+    @return null;
+  }
+}
+
+@function sfnk-is-type-list($list, $type) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    @each $item in $list {
+      @if type-of($item) != $type {
+        @return false;
+      }
+    }
+    @return true;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list}, #{$type} is not a valid argument for sfnk-list-items-type(). Pass a list or arglist.";
+    @return null;
+  }
+}
+
+@function sfnk-list-mapify-deep($list) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    $map: (),;
+    @each $item in $list {
+      @if type-of($item) == list and length($item) > 1 {
+        // (border 1px solid green, hover (color red, background yellow))  --> (border: 1px solid green, hover: (color: red, background-yellow))
+        $key: nth($item, 1);
+        $val: sfnk-list-reject-nth($item, 1);
+        @if type-of($val) == list {
+          $val: sfnk-list-mapify-deep($val);
+        }
+        $map: sfnk-map-set($map, $key, $val);
+        // @debug MAP $ma;
+      }
+      @else {
+        @warn "SassFunk: #{type-of($item)} #{$item} in #{$list} is not a list or contains only one item. All items in the list passed to sfnk-list-mapify must be at least 2 items long.";
+        @return null;
+      }
+    }
+    @return $map;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-list-mapify(). Pass a list or arglist.";
+    @return null;
+  }
+
+}
+
+@function sfnk-list-mapify($list) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    $map: null;
+    @each $item in $list {
+      @if type-of($item) == list && length($item) > 1 {
+        // (border 1px solid green, hover (color: red, background: yellow))  --> (border: 1px solid green, hover: (color: red, background-yellow))
+        $key: nth($item, 1);
+        $val: sfnk-list-reject-nth($item, 1);
+        $map: sfnk-map-set($map, $key, $val);
+      }
+      @else {
+        @warn "SassFunk: #{type-of($item)} #{$item} is not a list. All items in the list passed to sfnk-list-mapify must be at least 2 items long.";
+        @return null;
+      }
+    }
+    @return $map;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-list-mapify(). Pass a list or arglist.";
+    @return null;
+  }
+}
+@function sfnk-list-prepend($list, $value) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    $new-list: ();
+    $new-list: append($new-list, $value);
+    @each $item in $list {
+      $new-list: append($new-list, $item);
+    }
+    @return $new-list;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-list-prepend(). Pass a list or arglist.";
+    @return null;
+  }
+}
+
+@function sfnk-list-reject-all($list, $value) {
+  @if type-of($list) == list {
+    $rejected: ();
+    @for $i from 1 through length($list) {
+      @if nth($list, $i) != $value {
+        $rejected: append($rejected, nth($list, $i));
+      }
+    }
+    @return $rejected;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-list-reject-all(). Pass a list or arglist.";
+    @return null;
+  }
+}
+
+@function sfnk-list-reject-nth($list, $index, $pos: 1) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    $rejected-list: ();
+    @if $pos == -1 {
+      $list: sfnk-list-reverse($list);
+    }
+    @for $i from 1 through length($list) {
+      @if $i != $index {
+        $rejected-list: append($rejected-list, nth($list, $i));
+      }
+    }
+    @if $pos == -1 {
+      $rejected-list: sfnk-list-reverse($rejected-list);
+    }
+    @return $rejected-list;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-list-reject-nth(). Pass a list or arglist and the index of the item to be removed.";
+    @return null;
+  }
+}
+
+@function sfnk-list-reject($list, $value, $pos: 1) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    @if index($list, $value) {
+      $rejected-list: ();
+      @if $pos == -1 or $pos == 1 {
+        @if $pos == -1 { // index from end of list
+          $list: sfnk-list-reverse($list);
+        }
+        // (1, 2, 3, 4, 3, 5) --> (1, 2, 4, 3, 5)
+        $done: false;
+        @each $item in $list {
+          @if $item != $value {
+            $rejected-list: append($rejected-list, $item);
+          }
+          @else {
+            @if not $done {
+              $done: true;
+            }
+            @else {
+              $rejected-list: append($rejected-list, $item);
+            }
+          }
+        }
+        @if $pos == -1 { // reverse list again if it was reversed in order to remove the last matching element
+          $rejected-list: sfnk-list-reverse($rejected-list);
+        }
+        @return $rejected-list;
+      }
+      @else {
+        @warn "SassUtils: #{$pos} is not a valid position argument for reject-list(). Pass 1, -1, or nothing.";
+        @return null;
+      }
+      @return $list;
+    }
+    @else {
+      @return $list;
+    }
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-list-reject(). Pass a list or arglist and a value to be removed.";
+    @return null;
+  }
+}
+
+@function sfnk-list-reverse($list) {
+  @if type-of($list) == list or type-of($list) == arglist {
+    $reversed: ();
+    @for $i from 0 through length($list) {
+      $rev-index: length($list) - $i;
+      @if $rev-index > 0 {
+        $reversed: append($reversed, nth($list, $rev-index));
+      }
+    }
+    @return $reversed;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($list)} #{$list} is not a valid argument for sfnk-list-reverse(). Pass a list or arglist.";
+    @return null;
+  }
+}
+
+@function sfnk-map-listify-deep($map) {
+  @if type-of($map) == map {
+    $flattened: ();
+    $keys: map-keys($map);
+    @for $i from 1 through length($map) {
+      $list: ();
+      $key: nth($keys, $i);
+      $value: map-get($map, $key);
+      @if type-of($value) == map {
+        $value: sfnk-map-listify-deep($value);
+      }
+      $list: append($list, $key);
+      $list: append($list, $value);
+      $flattened: append($flattened, $list);
+    }
+    @return $flattened;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($map)} #{$map} is not a valid argument for sfnk-map-listify-deep(). Pass a list or arglist.";
+    @return null;
+  }
+}
+
+@function sfnk-map-listify($map, $flatten-lists: false) {
+  @if type-of($map) == map {
+    $flattened: ();
+    $keys: map-keys($map);
+    @for $i from 1 through length($map) {
+      $list: ();
+      $key: nth($keys, $i);
+      $value: map-get($map, $key);
+      @if type-of($value) == list and $flatten-lists == true {
+        $list: sfnk-list-prepend($value, $key);
+      }
+      @else {
+        $list: append($list, $key);
+        $list: append($list, $value);
+      }
+      $flattened: append($flattened, $list);
+    }
+    @return $flattened;
+  }
+  @else {
+    @warn "SassFunk: #{type-of($map)} #{$map} is not a valid argument for sfnk-map-listify(). Pass a list or arglist.";
+    @return null;
+  }
+}
+
+@function sfnk-map-set($map, $key, $value) {
+  @if type-of($map) == map {
+    @return map-merge($map, ($key: $value));
+  }
+  @else {
+    @warn "SassFunk: #{type-of($map)} #{$map} is not a valid argument for sfnk-map-set(). Pass a map as the first argument.";
+    @return null;
+  }
+}
