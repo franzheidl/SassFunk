@@ -13,7 +13,7 @@ When installing as a Ruby Gem, SassFunk will be installed as a Compass extension
     
 To install ia bower run:
 
-	$ bower install --save-dev SassFunk
+	$ bower install --save-dev sassfunk
 	
 For a manual install, include `dist/SassFunk.scss` in the appropriate directory of your project.
 

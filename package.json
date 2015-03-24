@@ -6,7 +6,7 @@
   "author": "Franz Heidl",
   "license": "MIT",
   "homepage": "https://github.com/franzheidl/SassFunk",
-  "repository": "https://github.com/franzheidl/SassFunk.git",
+  "repository": "git://github.com/franzheidl/SassFunk.git",
   "scripts": {
     "test": "grunt test"
   },
