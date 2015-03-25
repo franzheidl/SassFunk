@@ -50,16 +50,16 @@ Returns a single color that is the mix of `$colors`.
 Returns the list of colors saturated by `$value`.
 
 #### sfnk-is-color-list( $list )
-Retruns a bool whether `$list` consists of color values only.
+Returns a bool whether `$list` consists of color values only.
 
 #### sfnk-is-nested-list( $list )
 Returns a bool whether `$list` contains any items that are lists.
 
 #### sfnk-is-numeric-list( $list )
-Returns a bool whether `$list`consists of numbers only.
+Returns a bool whether `$list` consists of numbers only.
 
 #### sfnk-is-type-list( $list, $type )
-Returns a bool whether all items of $list are of type `$type` .
+Returns a bool whether all items of `$list` are of type `$type` .
 
 #### sfnk-is-valid-border( $border, [$strict:false] )
 Returns a bool whether $border is a valid CSS border statement. Pass `strict: true`to check whether $border is a complete shorthand CSS border statement consisting of border-width, border-style, and border-color.
@@ -71,7 +71,7 @@ Returns a bool whether `$list1` contains all items in `$list2`.
 Returns a bool whether `$list` contains `$value`.
 
 #### sfnk-list-mapify( $list )
-Creates a map from a nested list where the keys are the first items of the items of `$list`, the value the remaining items of each item of `$list`.
+Creates a map from a nested `$list` where the keys are the first items of the items of `$list`, the value the remaining items of each item of `$list`.
 
 #### sfnk-list-prepend( $list, $value )
 Returns `$list`prepended with `$value`.
