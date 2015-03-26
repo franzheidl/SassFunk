@@ -1,6 +1,6 @@
 # SassFunk
 
-A collection of utility functions for Sass.
+A collection of Sass utility functions.
 
 ## Install SassFunk
 
@@ -11,7 +11,7 @@ When installing as a Ruby Gem, SassFunk will be installed as a Compass extension
     $ gem install SassFunk
     
     
-To install ia bower run:
+To install via bower run:
 
 	$ bower install --save-dev sassfunk
 	
@@ -35,13 +35,13 @@ Returns the list of colors darkened by `$value`.
 Returns the list of colors desatureated by `$value`.
 
 #### sfnk-colors-grayscale( $colors )
-Returns the list of equivalent grayscale colors.
+Returns the list of equivalent grayscale colors to `$colors`.
 
 #### sfnk-colors-invert( $colors )
 Returns the list of inverted colors.
 
 #### sfnk-colors-lighten( $colors, $value )
-Returns th elist of colors lightened by `$value`.
+Returns the list of colors lightened by `$value`.
 
 #### sfnk-colors-mix( $colors )
 Returns a single color that is the mix of `$colors`.
@@ -62,7 +62,7 @@ Returns a bool whether `$list` consists of numbers only.
 Returns a bool whether all items of `$list` are of type `$type` .
 
 #### sfnk-is-valid-border( $border, [$strict:false] )
-Returns a bool whether $border is a valid CSS border statement. Pass `strict: true`to check whether $border is a complete shorthand CSS border statement consisting of border-width, border-style, and border-color.
+Returns a bool whether `$border` is a valid CSS border statement. Pass `strict: true`to check whether `$border` is a complete shorthand CSS border statement consisting of `border-width`, `border-style`, and `border-color`.
 
 #### sfnk-list-contains-all( $list1, $list2 )
 Returns a bool whether `$list1` contains all items in `$list2`.
@@ -77,7 +77,7 @@ Creates a map from a nested `$list` where the keys are the first items of the it
 Returns `$list`prepended with `$value`.
 
 #### sfnk-list-reject-all( $list, $value )
-Returns a list where all occurences of `$value`.
+Returns `$list` with all occurences of `$value` removed.
 
 #### sfnk-list-reject-nth( $list, $index, [$pos: 1] )
 Rejects the item at `$index` from `$list`. Pass `$pos: -1` to reject the item at `$index` from the end of `$list`.
