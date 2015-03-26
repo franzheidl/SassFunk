@@ -1,20 +1,16 @@
 @include describe("The sfnk-list-mapify function") {
 
-$list: (border 1px solid green);
-$map: (border: (1px solid green));
+$list: (border 1px solid green, outline 2px blue);
+$map: (border: (1px solid green), outline: 2px blue);
 
-$list1: (border 1px solid green, hover (color: red, background: yellow));
-$map1: (border: 1px solid green, hover: (color: red, background: yellow));
-
-$list2: (1 2 3, 4 (5 6 7 8));
-$map2: (1: (2 3), 4: (5 6 7 8));
+$list1: (1 2 3, 4 5 6 7 8);
+$map1: (1: (2 3), 4: (5 6 7 8));
 
 $invalid-list: ((1 2 3), 1, (2 3));
 
   @include it("should return a map where the keys are the first items of each list item, the values the remaining list items of each item") {
-    @inlcude should( expect( sfnk-list-mapify( ($list)) )), to( be( $map ) ) );
-    @inlcude should( expect( sfnk-list-mapify( ($list1)) )), to( be( $map1 ) ) );
-    @inlcude should( expect( sfnk-list-mapify( ($list2)) )), to( be( $map2 ) ) );
+    @include should( expect( sfnk-list-mapify( $list ) ), to( be( $map ) ) );
+    @include should( expect( sfnk-list-mapify( $list1 ) ), to( be( $map1 ) ) );
   }
 
   @include it("should return null and warn if an item of the list has a length of only one") {

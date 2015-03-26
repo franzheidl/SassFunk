@@ -1,12 +1,18 @@
 @function sfnk-list-mapify($list) {
   @if type-of($list) == list or type-of($list) == arglist {
-    $map: null;
+    $map: ();
     @each $item in $list {
-      @if type-of($item) == list && length($item) > 1 {
+      @if type-of($item) == list {
         // (border 1px solid green, hover (color: red, background: yellow))  --> (border: 1px solid green, hover: (color: red, background-yellow))
-        $key: nth($item, 1);
-        $val: sfnk-list-reject-nth($item, 1);
-        $map: sfnk-map-set($map, $key, $val);
+        @if length($item) > 1 {
+          $key: nth($item, 1);
+          $val: sfnk-list-reject-nth($item, 1);
+          $map: map-merge($map, ($key: $val));
+        }
+        @else {
+          @warn "SassFunk: #{type-of($item)} #{$item} is not a list. All items in the list passed to sfnk-list-mapify must be at least 2 items long.";
+          @return null;
+        }
       }
       @else {
         @warn "SassFunk: #{type-of($item)} #{$item} is not a list. All items in the list passed to sfnk-list-mapify must be at least 2 items long.";
