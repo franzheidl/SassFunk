@@ -1,16 +1,16 @@
 {
   "name": "SassFunk",
   "homepage": "https://github.com/franzheidl/SassFunk",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Franz Heidl",
   "description": "A collection of Sass utility functions",
   "license": "MIT",
   "keywords": ["sass", "lists", "colors", "scss", "maps", "utilities", "helpers"],
-  "main": "_SassFunk.scss",
+  "main": "dist/_SassFunk.scss",
   "ignore": [
-    "node_modules",
-    "SassFunk.gemspec",
-    "lib",
-    "test"
+    "*",
+    "!dist/_SassFunk.scss",
+    "!README.md",
+    "!LICENSE"
   ]
 }
