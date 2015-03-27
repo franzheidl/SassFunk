@@ -1,5 +1,8 @@
 # SassFunk
 
+[![Bower version](https://badge.fury.io/bo/sassfunk.svg)](http://badge.fury.io/bo/sassfunk)
+[![Gem Version](https://badge.fury.io/rb/SassFunk.svg)](http://badge.fury.io/rb/SassFunk)
+
 A collection of Sass utility functions.
 
 ## Install SassFunk
